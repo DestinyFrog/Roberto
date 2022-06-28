@@ -1,46 +1,42 @@
-//Projeto: Roberto, o andarilho obediente
+// Projeto: Roberto, o andarilho obediente
 
-//pinos do motor 1 (direita)
-const int IN1 = 10;
-const int IN2 = 11;
-const int ENA = 9; 
+// pinos do motor 1 (direita)
+const int in1 = 10;
+const int in2 = 11;
+const int ena = 9;
 
-//pinos do motor 2 (esquerda)
-const int IN3 = 12;
-const int IN4 = 13;
-const int ENB = 8; 
+// pinos do motor 2 (esquerda)
+const int in3 = 12;
+const int in4 = 13;
+const int enb = 8;
 
-//pinos dos sensores
-const int Sdir = 52;
-const int Scen = 50;
-const int Sesq = 48;
-// 0 = false = preto
-// 1 = true = branco 
+//pinos dos sensores de luminosidade
+const int s1 = 52;  // Direita
+const int s2 = 53;  // Esquerda
 
-int speed = 195; 
+//velocidades
+int Speed           = 190; //velocidade para padrao
+int BackSpeed       = 250; //velocidade para tras
 
-//metodos padrao
 void setup(){
-     Serial.begin(9600);
-    
-     //setando o pino dos motores
-     pinMode(IN1, OUTPUT);
-     pinMode(IN2, OUTPUT);
-     pinMode(ENA, OUTPUT);
-     pinMode(IN3, OUTPUT);
-     pinMode(IN4, OUTPUT);
-     pinMode(ENB, OUTPUT); 
+    Serial.begin(9600);
 
-     //setando o pino dos sensores
-     pinMode(Sdir, INPUT);
-     pinMode(Scen, INPUT);
-     pinMode(Sesq, INPUT);
+    //entradas dos pinos dos motores
+    pinMode(in1, OUTPUT);
+    pinMode(in2, OUTPUT);
+    pinMode(in3, OUTPUT);
+    pinMode(in4, OUTPUT);
+    pinMode(ena, OUTPUT);
+    pinMode(enb, OUTPUT);
+    
+    //entrada dos pinos dos sensores
+    pinMode(s1, INPUT);
+    pinMode(s2, INPUT);
 }
 void loop(){
      //resposta dos sensores de luminosidade em variavel bool
-     bool ResSdir = digitalRead(Sdir);
-     bool ResScen = digitalRead(Scen);
-     bool ResSesq = digitalRead(Sesq); 
+     bool
+     bool
 
      
 }
