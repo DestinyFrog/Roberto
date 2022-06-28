@@ -35,10 +35,21 @@ void setup(){
 }
 void loop(){
      //resposta dos sensores de luminosidade em variavel bool
-     bool
-     bool
+     bool s1Res = digitalRead(s1);
+     bool s2Res = digitalRead(s1);
 
-     
+     if(s1Res == s2Res){
+        moveDirMotor(LOW, HIGH, Speed);
+        moveEsqMotor(LOW, HIGH, Speed);
+     }else{
+        if(s1Res){
+            moveDirMotor(LOW, HIGH, Speed);
+            moveEsqMotor(HIGH, LOW, BackSpeed);
+        }else{
+            moveDirMotor(HIGH, LOW, BackSpeed);
+            moveEsqMotor(LOW, HIGH, Speed);
+        }
+     }
 }
 
 
