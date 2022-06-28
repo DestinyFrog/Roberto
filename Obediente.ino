@@ -55,12 +55,12 @@ void loop(){
 
 //métodos criados
 void moveDirMotor(int power1, int power2, int spd){
-     digitalWrite(IN1, power1);
-     digitalWrite(IN2, power2);
-     analogWrite(ENA, spd);
+     digitalWrite(in1, power1);
+     digitalWrite(in2, power2);
+     analogWrite(ena, spd);
 }
 void moveEsqMotor(int power1, int power2, int spd){
-     digitalWrite(IN3, power1);
-     digitalWrite(IN4, power2);
-     analogWrite(ENB, spd);
+     digitalWrite(in3, power1);
+     digitalWrite(in4, power2);
+     analogWrite(enb, spd);
 };
