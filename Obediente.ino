@@ -1,66 +1,72 @@
-// Projeto: Roberto, o andarilho obediente
+//projeto Roberto, o andarilho
 
-// pinos do motor 1 (direita)
+//variaveis do motor 1
 const int in1 = 10;
 const int in2 = 11;
 const int ena = 9;
 
-// pinos do motor 2 (esquerda)
+//variaveis do motor 2
 const int in3 = 12;
 const int in4 = 13;
 const int enb = 8;
 
-//pinos dos sensores de luminosidade
-const int s1 = 52;  // Direita
-const int s2 = 53;  // Esquerda
+//variaveis dos sensores
+const int s1 = 52;
+const int s2 = 51;
+const int s3 = 53;
 
-//velocidades
-int Speed           = 190; //velocidade para padrao
-int BackSpeed       = 250; //velocidade para tras
+int Speed = 120;
+int curveSpeed = 255;
+int backSpeed = 255;
 
+//metodos principais
 void setup(){
-    Serial.begin(9600);
+  //entradas dos pinos motores
+  pinMode(in1, OUTPUT);
+  pinMode(in2, OUTPUT);
+  pinMode(ena, OUTPUT);
+  pinMode(in3, OUTPUT);
+  pinMode(in4, OUTPUT);
+  pinMode(enb, OUTPUT);
 
-    //entradas dos pinos dos motores
-    pinMode(in1, OUTPUT);
-    pinMode(in2, OUTPUT);
-    pinMode(in3, OUTPUT);
-    pinMode(in4, OUTPUT);
-    pinMode(ena, OUTPUT);
-    pinMode(enb, OUTPUT);
-    
-    //entrada dos pinos dos sensores
-    pinMode(s1, INPUT);
-    pinMode(s2, INPUT);
+  pinMode(s1, INPUT);
+  pinMode(s2, INPUT);
+  pinMode(s3, INPUT);
+
+  Serial.begin(9600);
+
+  playMotorDir(HIGH, LOW, 255);
+  playMotorEsq(HIGH, LOW, 255);
 }
 void loop(){
-     //resposta dos sensores de luminosidade em variavel bool
-     bool s1Res = digitalRead(s1);
-     bool s2Res = digitalRead(s1);
+  bool s1Res = digitalRead(s1);
+  bool s2Res = digitalRead(s2);
+  bool s3Res = digitalRead(s3);
 
-     if(s1Res == s2Res){
-        moveDirMotor(LOW, HIGH, Speed);
-        moveEsqMotor(LOW, HIGH, Speed);
-     }else{
-        if(s1Res){
-            moveDirMotor(LOW, HIGH, Speed);
-            moveEsqMotor(HIGH, LOW, BackSpeed);
-        }else{
-            moveDirMotor(HIGH, LOW, BackSpeed);
-            moveEsqMotor(LOW, HIGH, Speed);
-        }
-     }
+  if(s1Res == s3Res){
+    Serial.println("frente");
+    playMotorDir(HIGH, LOW, Speed);
+    playMotorEsq(HIGH, LOW, Speed);
+  }else{
+    if(s1Res){
+      Serial.println("esquerda");
+      playMotorDir(HIGH, LOW, curveSpeed);
+      playMotorEsq(LOW, HIGH, backSpeed);
+    }else{
+      Serial.println("direita");
+      playMotorDir(LOW, HIGH, backSpeed);
+      playMotorEsq(HIGH, LOW, curveSpeed);
+    }
+  }
+  delay(2);
 }
-
-
-//métodos criados
-void moveDirMotor(int power1, int power2, int spd){
-     digitalWrite(in1, power1);
-     digitalWrite(in2, power2);
-     analogWrite(ena, spd);
+void playMotorDir(int force1, int force2, int velo){
+  digitalWrite(in1, force1);
+  digitalWrite(in2, force2);
+  analogWrite(ena, velo);
 }
-void moveEsqMotor(int power1, int power2, int spd){
-     digitalWrite(in3, power1);
-     digitalWrite(in4, power2);
-     analogWrite(enb, spd);
-};
+void playMotorEsq(int force1, int force2, int velo){
+  digitalWrite(in3, force1);
+  digitalWrite(in4, force2);
+  analogWrite(enb, velo); 
+}
